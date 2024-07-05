@@ -34,7 +34,8 @@ COPY --from=builder /usr/src/app/package.json .
 COPY --from=builder /usr/src/app/pnpm-lock.yaml .
 COPY --from=builder /usr/src/app/next.config.js ./
 COPY --from=builder /usr/src/app/public ./public
-COPY --from=builder /usr/src/app/.next ./.next
+COPY --from=builder /usr/src/app/.next/standalone ./
+COPY --from=builder /usr/src/app/.next/static ./.next/static
 
 # Expose the port on which the application will run
 EXPOSE 3000
