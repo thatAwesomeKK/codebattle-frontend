@@ -1,5 +1,5 @@
 # Builder stage
-FROM --platform=linux/arm64 node:20.10.0-alpine as builder
+FROM node:20.10.0-alpine as builder
 WORKDIR /usr/src/app
 
 # Install bash (if needed)
@@ -23,7 +23,7 @@ COPY . .
 RUN pnpm run build
 
 # Runner stage
-FROM --platform=linux/arm64 node:20.10.0-alpine as runner
+FROM node:20.10.0-alpine as runner
 WORKDIR /usr/src/app
 
 # Install pnpm globally in the runner stage (if needed)
