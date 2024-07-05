@@ -17,7 +17,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GH_PAT }}" | docker login ghcr.io -u thatAwesomeKK --password-stdin
+        run: docker login ghcr.io -username thatAwesomeKK --password ${{ secrets.GH_PAT }}
 
       - name: Build and push the image
         env: 
