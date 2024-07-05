@@ -20,9 +20,8 @@ jobs:
         run: echo "${{ secrets.GH_PAT }}" | docker login ghcr.io -u thatAwesomeKK --password-stdin
 
       - name: Build and push the image
-        env: 
-          NEXT_PUBLIC_API_URL: http://localhost:5000
+        env:
+          NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
         run: |
-          docker buildx build --platform linux/arm64 \
-            --build-arg NEXT_PUBLIC_API_URL=${{ env.NEXT_PUBLIC_API_URL }} \
+          docker buildx build --build-arg NEXT_PUBLIC_API_URL=${{ env.NEXT_PUBLIC_API_URL }} \
             -t ghcr.io/thatawesomekk/codebattle-frontend:latest --push .
