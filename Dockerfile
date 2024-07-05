@@ -1,6 +1,8 @@
 FROM --platform=linux/arm64 node:20.10.0-alpine as builder
 WORKDIR /usr/src/app
 
+ARG NEXT_PUBLIC_API_URL
+
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
 RUN npm install -g pnpm
