@@ -1,0 +1,28 @@
+name: DOCKER Image CI for GHCR
+
+on:
+  push:
+    branches:
+      - v1.0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GH_PAT }}" | docker login ghcr.io -u thatAwesomeKK --password-stdin
+
+        
+
+      - name: Build and push the image
+        env: 
+          NEXT_PUBLIC_API_URL=http://localhost:5000
+        run: |
+          docker buildx build --platform linux/arm64 -t ghcr.io/thatawesomekk/codebattle-frontend:latest --push .
